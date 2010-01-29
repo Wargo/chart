@@ -8,7 +8,7 @@
  *
  */
 class CounterHelper extends AppHelper {	
-	public $helpers = array('Flash');
+	public $helpers = array('Chart.Flash');
 	
 	// location of the flash file relative to the webroot
 	public $swf = 'flash/fl_countdown_v3_3.swf';

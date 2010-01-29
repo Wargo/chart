@@ -224,9 +224,9 @@
  * @version 3.3.93
  * 
  **/
-App::import('Vendor', 'flashchart/open-flash-chart');
+App::import('Vendor', 'Chart.flashchart/open-flash-chart');
 class FlashChartHelper extends AppHelper {	
-	public $helpers = array('Flash','Javascript');
+	public $helpers = array('Chart.Flash','Javascript');
 	
 	/**
 	 * The Vendor OpenFlashChart object. The helper
@@ -461,6 +461,7 @@ class FlashChartHelper extends AppHelper {
 						break;
 						default:
 			                $set_method = 'set_' . $key;
+							//debug ($set_method); die;
 			                if (is_array($setting)) {
 			                    $element->$set_method($setting[0], $setting[1]);
 			                } else {
@@ -540,10 +541,13 @@ class FlashChartHelper extends AppHelper {
 		} else {
 			$scatter = new scatter($options['colour'], $options['size']);
 		}		
-		$values = array();
-		foreach ($this->data[$datasetName] as $row) {
-			$values[] = new scatter_value($row[$options['x_key']], $row[$options['y_key']]);
+		$return = array();
+		$values = Set::combine($this->data[$datasetName], '/Update/value', '/Update/id');
+		$keys = array_keys($values);
+		foreach($keys as $x) {
+			$return[] = new scatter_value($values[$x], $x);
 		}
+		$values = $return;
     if (!empty($this->tooltip) ) {
       $element->set_tooltip($this->tooltip);
     }
@@ -905,12 +909,13 @@ class FlashChartHelper extends AppHelper {
 		if (!empty($options)) {
 			foreach ($options as $key => $setting) {
 				$set = 'set_' . $key;
-				if (is_array($setting) && sizeof($setting) == 2) {
+				if (is_array($setting) && sizeof($setting) == 3) {
+					$y->$set($setting[0], $setting[1], $setting[2]);
+				} elseif(is_array($setting) && sizeof($setting) == 2) {
 					$y->$set($setting[0], $setting[1]);
 				} else {
 					$y->$set($setting);
 				}
-			
 			}
 		}
 		$this->Chart->set_y_axis_right($y);
