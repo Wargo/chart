@@ -1,10 +1,12 @@
-Introduccion
+Introducci√≥n
 ============
 
-Un plugin para crear gr·ficas usando la librerÌa Open Flash Chart 2
+Un plugin para crear gr√°ficas usando la librer√≠a Open Flash Chart 2.
+Basado en el trabajo de Alkemann
+http://github.com/alkemann/CakePHP-Assets
 
 
 Instrucciones
 =============
 
-El plugin todavÌa est· en desarrollo
+El plugin todav√≠a est√° en desarrollo
