@@ -7,6 +7,6 @@ http://github.com/alkemann/CakePHP-Assets
 
 
 Instrucciones
-=============
+-------------
 
 El plugin todavía está en desarrollo
